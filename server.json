@@ -1,25 +1,15 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.ansvar-systems/uk-livestock",
-  "description": "UK livestock welfare, feed, health, and movement rules via MCP. 8 species, 80 welfare standards, 47 health conditions, DEFRA codes, APHA movement rules.",
+  "name": "io.github.Ansvar-Systems/uk-livestock",
+  "description": "UK livestock welfare, feed, health, and movement rules \u2014 8 species, DEFRA codes",
   "repository": {
-    "url": "https://github.com/ansvar-systems/uk-livestock-mcp",
+    "url": "https://github.com/Ansvar-Systems/uk-livestock-mcp",
     "source": "github"
   },
   "version": "0.1.0",
-  "packages": [
-    {
-      "registryType": "npm",
-      "identifier": "@ansvar/uk-livestock-mcp",
-      "version": "0.1.0",
-      "transport": {
-        "type": "stdio"
-      }
-    }
-  ],
   "remotes": [
     {
-      "transportType": "streamable-http",
+      "type": "streamable-http",
       "url": "https://mcp.ansvar.eu/uk-livestock/mcp"
     }
   ]
