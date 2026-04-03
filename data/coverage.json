@@ -1,0 +1,16 @@
+{
+  "mcp_name": "Livestock MCP",
+  "jurisdiction": "GB",
+  "build_date": "2026-04-03",
+  "species": 4,
+  "welfare_standards": 21,
+  "stocking_densities": 10,
+  "feed_requirements": 8,
+  "animal_health_conditions": 14,
+  "movement_rules": 8,
+  "housing_requirements": 8,
+  "breeding_guidance": 4,
+  "fts_entries": 73,
+  "notifiable_diseases": 4,
+  "source_hash": "baf437a015fd65f4"
+}
