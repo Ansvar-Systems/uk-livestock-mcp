@@ -45,6 +45,21 @@ const SPECIES = [
     name: 'Goats',
     common_breeds: ['Saanen', 'Toggenburg', 'Anglo-Nubian', 'British Alpine', 'Boer', 'Golden Guernsey', 'Pygmy'],
   },
+  {
+    id: 'ducks',
+    name: 'Ducks',
+    common_breeds: ['Pekin', 'Aylesbury', 'Khaki Campbell', 'Indian Runner', 'Cherry Valley', 'Muscovy'],
+  },
+  {
+    id: 'turkeys',
+    name: 'Turkeys',
+    common_breeds: ['Bronze', 'Norfolk Black', 'Broad Breasted White', 'Bourbon Red', 'Narragansett'],
+  },
+  {
+    id: 'deer',
+    name: 'Farmed Deer',
+    common_breeds: ['Red Deer', 'Fallow Deer', 'Sika'],
+  },
 ];
 
 // ── Welfare Standards ────────────────────────────────────────────
@@ -406,6 +421,286 @@ const WELFARE_STANDARDS: WelfareStandard[] = [
     source: 'DEFRA Laying Hens Regulations',
   },
 
+  // Sheep -- extra standards for full coverage
+  {
+    species_id: 'sheep', production_system: 'outdoor', category: 'heat_shelter',
+    standard: 'Shelter from extreme heat',
+    legal_minimum: 'Access to shade in hot weather',
+    best_practice: 'Natural/artificial shade, supplementary water points',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Sheep',
+  },
+  {
+    species_id: 'sheep', production_system: 'all', category: 'weaning',
+    standard: 'Weaning management',
+    legal_minimum: 'Lambs not weaned before 6 weeks',
+    best_practice: '8-12 weeks, depending on ewe condition and pasture',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Sheep',
+  },
+  {
+    species_id: 'sheep', production_system: 'all', category: 'flock_records',
+    standard: 'Flock record keeping',
+    legal_minimum: 'Maintain flock register',
+    best_practice: 'Individual ID records, health events, breeding records',
+    regulation_ref: 'Sheep and Goats (Records, Identification and Movement) (England) Order 2009',
+    source: 'DEFRA Code of Practice for the Welfare of Sheep',
+  },
+
+  // Cattle -- extra standards for full coverage
+  {
+    species_id: 'cattle', production_system: 'all', category: 'calving_management',
+    standard: 'Calving management',
+    legal_minimum: 'Monitor calving cows',
+    best_practice: 'Dedicated calving area, 24hr supervision during calving period',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Cattle',
+  },
+  {
+    species_id: 'cattle', production_system: 'indoor', category: 'heat_stress',
+    standard: 'Heat stress management',
+    legal_minimum: 'Adequate ventilation',
+    best_practice: 'Fans, misters, shade, reduce stocking density in summer',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Cattle',
+  },
+  {
+    species_id: 'cattle', production_system: 'indoor', category: 'housing_hygiene',
+    standard: 'Slurry and housing hygiene',
+    legal_minimum: 'Maintain clean housing',
+    best_practice: 'Daily scraping, adequate drainage, regular bedding change',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Cattle',
+  },
+
+  // Pigs -- extra standards for full coverage
+  {
+    species_id: 'pigs', production_system: 'all', category: 'transport',
+    standard: 'Transport welfare',
+    legal_minimum: 'Fit to travel, max 8 hours without water',
+    best_practice: '6 hours max, wetting facilities, lower stocking density',
+    regulation_ref: 'Welfare of Animals (Transport) (England) Order 2006',
+    source: 'DEFRA Code of Practice for the Welfare of Pigs',
+  },
+  {
+    species_id: 'pigs', production_system: 'all', category: 'stunning_slaughter',
+    standard: 'Stunning and slaughter requirements',
+    legal_minimum: 'Effective stunning before slaughter',
+    best_practice: 'CO2 or electrical head-only, regular equipment checks',
+    regulation_ref: 'Welfare of Animals at the Time of Killing (England) Regulations 2015',
+    source: 'DEFRA Code of Practice for the Welfare of Pigs',
+  },
+  {
+    species_id: 'pigs', production_system: 'all', category: 'biosecurity',
+    standard: 'Biosecurity measures',
+    legal_minimum: 'Prevent contact with wild boar',
+    best_practice: 'Double fencing, boot dips, visitor log, quarantine for new stock',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Pigs',
+  },
+
+  // Poultry -- extra standards for full coverage
+  {
+    species_id: 'poultry', production_system: 'outdoor', category: 'free_range_access',
+    standard: 'Free range outdoor access',
+    legal_minimum: 'Outdoor access during daylight for free-range labelled',
+    best_practice: 'Pop-holes open at dawn, tree cover/shelter in range',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Laying Hens Regulations',
+  },
+  {
+    species_id: 'poultry', production_system: 'all', category: 'depopulation',
+    standard: 'Depopulation and catching welfare',
+    legal_minimum: 'Humane catching and crating',
+    best_practice: 'Low-light catching, trained catchers, max 4 birds per hand',
+    regulation_ref: 'Welfare of Animals at the Time of Killing (England) Regulations 2015',
+    source: 'DEFRA Code of Practice for the Welfare of Meat Chickens',
+  },
+  {
+    species_id: 'poultry', production_system: 'all', category: 'emergency_killing',
+    standard: 'Emergency killing method',
+    legal_minimum: 'Trained person, approved method',
+    best_practice: 'Cervical dislocation for <3kg, mechanical for larger',
+    regulation_ref: 'Welfare of Animals at the Time of Killing (England) Regulations 2015',
+    source: 'DEFRA Code of Practice for the Welfare of Meat Chickens',
+  },
+
+  // Goats -- extra standards for full coverage
+  {
+    species_id: 'goats', production_system: 'all', category: 'parasites',
+    standard: 'Parasite management',
+    legal_minimum: 'Treat for worms when needed',
+    best_practice: 'Faecal egg counts before treatment, targeted selective treatment',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Goats',
+  },
+  {
+    species_id: 'goats', production_system: 'all', category: 'milking',
+    standard: 'Milking hygiene and routine',
+    legal_minimum: 'Milk at regular intervals',
+    best_practice: 'Twice daily, clean routine, teat dipping',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Goats',
+  },
+  {
+    species_id: 'goats', production_system: 'all', category: 'kid_colostrum',
+    standard: 'Kid colostrum management',
+    legal_minimum: 'Adequate colostrum within hours',
+    best_practice: '500ml colostrum within 1 hour, dam-reared preferred',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Goats',
+  },
+
+  // Ducks -- welfare standards
+  {
+    species_id: 'ducks', production_system: 'indoor', category: 'space',
+    standard: 'Indoor stocking density for ducks',
+    legal_minimum: 'Indoor 6 ducks/m2',
+    best_practice: '4 ducks/m2 with outdoor access',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  {
+    species_id: 'ducks', production_system: 'all', category: 'water_bathing',
+    standard: 'Water for bathing and preening',
+    legal_minimum: 'Sufficient water to cover head for preening',
+    best_practice: 'Open water access for bathing and swimming',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  {
+    species_id: 'ducks', production_system: 'all', category: 'beak_trimming',
+    standard: 'Beak trimming restrictions for ducks',
+    legal_minimum: 'Not permitted for ducks',
+    best_practice: 'N/A -- already prohibited',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  {
+    species_id: 'ducks', production_system: 'all', category: 'feed',
+    standard: 'Feed provision for ducks',
+    legal_minimum: 'Fed at least once daily',
+    best_practice: 'Ad lib feed with grit, outdoor foraging access',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  {
+    species_id: 'ducks', production_system: 'all', category: 'catching',
+    standard: 'Catching and handling ducks',
+    legal_minimum: 'Handle carefully, carry by body not legs/wings',
+    best_practice: 'Upright carry, minimal handling, dim lighting for catching',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  {
+    species_id: 'ducks', production_system: 'all', category: 'nesting',
+    standard: 'Nesting provision for laying ducks',
+    legal_minimum: 'Nest areas provided for layers',
+    best_practice: 'Secluded nest boxes with clean litter',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+
+  // Turkeys -- welfare standards
+  {
+    species_id: 'turkeys', production_system: 'indoor', category: 'stocking',
+    standard: 'Indoor stocking density for turkeys',
+    legal_minimum: 'Indoor max 59 kg/m2 (male), 48 kg/m2 (female)',
+    best_practice: 'Max 40 kg/m2 with enrichment',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', production_system: 'all', category: 'beak_trimming',
+    standard: 'Beak trimming restrictions for turkeys',
+    legal_minimum: 'Only by infrared method before 10 days',
+    best_practice: 'No beak trimming, manage environment',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', production_system: 'indoor', category: 'perching',
+    standard: 'Perching and platform provision for turkeys',
+    legal_minimum: 'Not required for heavy breeds',
+    best_practice: 'Low perches for lighter breeds, platforms for heavy',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', production_system: 'indoor', category: 'lighting',
+    standard: 'Lighting regime for turkey welfare',
+    legal_minimum: '8 hours continuous dark per 24h',
+    best_practice: 'Natural light spectrum, dawn/dusk dimming',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', production_system: 'indoor', category: 'litter',
+    standard: 'Litter quality management for turkeys',
+    legal_minimum: 'Dry, friable litter',
+    best_practice: 'Wood shavings or straw, turned weekly, max 30% moisture',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', production_system: 'indoor', category: 'enrichment',
+    standard: 'Environmental enrichment for turkeys',
+    legal_minimum: 'Objects to investigate',
+    best_practice: 'Straw bales, platforms, hanging CDs/chains',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+
+  // Deer -- welfare standards
+  {
+    species_id: 'deer', production_system: 'outdoor', category: 'fencing',
+    standard: 'Fencing requirements for farmed deer',
+    legal_minimum: 'Minimum 1.8m high deer-proof fencing',
+    best_practice: '2.0m minimum, double fenced handling areas',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', production_system: 'all', category: 'handling',
+    standard: 'Handling facilities for farmed deer',
+    legal_minimum: 'Purpose-built deer handling facilities',
+    best_practice: 'Curved race, solid sides, non-slip flooring, minimal noise',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', production_system: 'all', category: 'velvet',
+    standard: 'Velvet antler removal',
+    legal_minimum: 'Velvet removal under anaesthesia by vet only',
+    best_practice: 'Consider whether removal is necessary',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', production_system: 'all', category: 'feed',
+    standard: 'Feed provision for farmed deer',
+    legal_minimum: 'Adequate forage and supplementary feed in winter',
+    best_practice: 'Gradual diet changes, mineral supplementation, browse',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', production_system: 'all', category: 'health_monitoring',
+    standard: 'Health monitoring for farmed deer',
+    legal_minimum: 'Regular observation',
+    best_practice: 'Monthly TB testing in high-risk areas, routine worming',
+    regulation_ref: 'Welfare of Farmed Animals (England) Regulations 2007',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', production_system: 'all', category: 'transport',
+    standard: 'Transport requirements for farmed deer',
+    legal_minimum: 'Specialist deer transport vehicle',
+    best_practice: 'Dark interior, bedded, short journey times, pre-load handling training',
+    regulation_ref: 'Welfare of Animals (Transport) (England) Order 2006',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+
   // Goats -- welfare standards
   {
     species_id: 'goats', production_system: 'indoor', category: 'space',
@@ -575,18 +870,44 @@ const STOCKING_DENSITIES: StockingDensity[] = [
     legal_minimum: 15.0, recommended: 12.0,
     source: 'AHDB Pork BRP',
   },
-  // Additional poultry
+  // Ducks
   {
-    species_id: 'poultry', age_class: 'duck', housing_type: 'indoor',
-    density_value: 5.0, density_unit: 'head_per_m2',
-    legal_minimum: 4.0, recommended: 6.0,
+    species_id: 'ducks', age_class: 'adult', housing_type: 'indoor',
+    density_value: 6.0, density_unit: 'head_per_m2',
+    legal_minimum: 6.0, recommended: 4.0,
     source: 'DEFRA Code of Practice for the Welfare of Ducks',
   },
   {
-    species_id: 'poultry', age_class: 'turkey', housing_type: 'indoor',
-    density_value: 2.5, density_unit: 'head_per_m2',
-    legal_minimum: 2.5, recommended: 2.5,
+    species_id: 'ducks', age_class: 'adult', housing_type: 'free_range',
+    density_value: 2000.0, density_unit: 'head_per_ha',
+    legal_minimum: 2000.0, recommended: 2000.0,
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  // Turkeys
+  {
+    species_id: 'turkeys', age_class: 'male', housing_type: 'indoor',
+    density_value: 3.0, density_unit: 'head_per_m2',
+    legal_minimum: 3.0, recommended: 2.5,
     source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', age_class: 'female', housing_type: 'indoor',
+    density_value: 5.0, density_unit: 'head_per_m2',
+    legal_minimum: 5.0, recommended: 4.0,
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  // Deer
+  {
+    species_id: 'deer', age_class: 'adult', housing_type: 'parkland',
+    density_value: 25.0, density_unit: 'head_per_ha',
+    legal_minimum: 20.0, recommended: 30.0,
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', age_class: 'adult', housing_type: 'intensive',
+    density_value: 70.0, density_unit: 'head_per_ha',
+    legal_minimum: 60.0, recommended: 80.0,
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
   },
 ];
 
@@ -725,6 +1046,51 @@ const FEED_REQUIREMENTS: FeedRequirement[] = [
     minerals: { calcium_g: 3, phosphorus_g: 2 },
     example_ration: 'Kid rearing pellet plus hay, transition from milk replacer by 8 weeks',
     notes: 'Growing kid from weaning to 6 months',
+  },
+  // Ducks
+  {
+    species_id: 'ducks', age_class: 'layer', production_stage: 'laying',
+    energy_mj_per_day: 0.9, protein_g_per_day: 16, dry_matter_kg: 0.15,
+    minerals: { calcium_g: 3.5, phosphorus_g: 0.3 },
+    example_ration: 'Layer pellet 150g/bird/day with oyster shell grit and access to greens',
+    notes: 'Laying duck in production, 16% crude protein',
+  },
+  {
+    species_id: 'ducks', age_class: 'grower', production_stage: 'growing',
+    energy_mj_per_day: 0.8, protein_g_per_day: 14, dry_matter_kg: 0.12,
+    minerals: { calcium_g: 1.0, phosphorus_g: 0.4 },
+    example_ration: 'Grower pellet ad-lib, 14-16% crude protein, outdoor foraging supplement',
+    notes: 'Growing duck 3-8 weeks',
+  },
+  // Turkeys
+  {
+    species_id: 'turkeys', age_class: 'adult', production_stage: 'finishing',
+    energy_mj_per_day: 2.5, protein_g_per_day: 45, dry_matter_kg: 0.35,
+    minerals: { calcium_g: 2.0, phosphorus_g: 0.8 },
+    example_ration: 'Finisher pellet ad-lib, 16-18% crude protein, whole grain supplement',
+    notes: 'Finishing turkey 12-20 weeks, approaching slaughter weight',
+  },
+  {
+    species_id: 'turkeys', age_class: 'adult', production_stage: 'breeding',
+    energy_mj_per_day: 1.8, protein_g_per_day: 30, dry_matter_kg: 0.25,
+    minerals: { calcium_g: 3.0, phosphorus_g: 0.6 },
+    example_ration: 'Breeder pellet 250g/bird/day with supplementary grit and greens',
+    notes: 'Breeding turkey hen, controlled feeding to manage body condition',
+  },
+  // Deer
+  {
+    species_id: 'deer', age_class: 'stag', production_stage: 'winter',
+    energy_mj_per_day: 25.0, protein_g_per_day: 200, dry_matter_kg: 3.0,
+    minerals: { calcium_g: 15, phosphorus_g: 10 },
+    example_ration: 'Hay/haylage ad-lib plus 1-2 kg concentrate, mineral block access',
+    notes: 'Red deer stag during winter supplementation period',
+  },
+  {
+    species_id: 'deer', age_class: 'hind', production_stage: 'lactating',
+    energy_mj_per_day: 18.0, protein_g_per_day: 150, dry_matter_kg: 2.5,
+    minerals: { calcium_g: 12, phosphorus_g: 8 },
+    example_ration: 'Good pasture plus 0.5-1.0 kg concentrate, browse and mineral supplementation',
+    notes: 'Red deer hind during lactation (May-September)',
   },
 ];
 
@@ -977,6 +1343,180 @@ const ANIMAL_HEALTH: AnimalHealthCondition[] = [
     prevention: 'Body condition scoring at mating (target 3.0-3.5), adequate nutrition in last 6 weeks, avoid sudden diet changes, exercise',
     notifiable: 0, source: 'AHDB / Goat Veterinary Society',
   },
+
+  // Additional sheep conditions
+  {
+    id: 'toxoplasmosis-sheep', species_id: 'sheep', condition: 'Toxoplasmosis',
+    symptoms: 'Abortion (mainly in mid-late pregnancy), mummified lambs, stillbirths, weak lambs at birth',
+    causes: 'Toxoplasma gondii protozoan. Cats shed oocysts in faeces; sheep ingest from contaminated feed or pasture.',
+    treatment: 'No effective treatment for acute infection. Decoquinate in feed can reduce abortion rates during an outbreak.',
+    prevention: 'Vaccination (Toxovax) before first mating, keep cats out of feed stores, remove cat faeces from lambing areas',
+    notifiable: 0, source: 'AHDB Sheep BRP Manual',
+  },
+  {
+    id: 'neonatal-losses-sheep', species_id: 'sheep', condition: 'Neonatal Losses',
+    symptoms: 'Lamb death within 48 hours of birth: hypothermia, starvation, watery mouth, joint ill, navel ill',
+    causes: 'Multifactorial: exposure, inadequate colostrum, poor mothering, infection (E. coli, Streptococcus). Low birth weight predisposes.',
+    treatment: 'Warming, stomach tube with colostrum for hypothermic lambs, antibiotics for infection (oxytetracycline), navel dipping.',
+    prevention: 'Adequate ewe nutrition in late pregnancy, clean lambing pens, navel dipping with iodine within 15 minutes, ensure colostrum intake within 1 hour',
+    notifiable: 0, source: 'AHDB Sheep BRP Manual',
+  },
+  {
+    id: 'clostridial-sheep', species_id: 'sheep', condition: 'Clostridial Diseases',
+    symptoms: 'Sudden death (pulpy kidney, blackleg, braxy), swollen joints, blood-stained froth at nose, rapid deterioration',
+    causes: 'Clostridium species (C. perfringens, C. chauvoei, C. septicum). Spores persist in soil. Triggered by sudden diet changes or stress.',
+    treatment: 'Rarely effective due to rapid onset. High-dose penicillin and antiserum may help if caught very early.',
+    prevention: 'Vaccination with multivalent clostridial vaccine (e.g., Heptavac-P Plus) -- ewes pre-lambing, lambs from 3 weeks. Annual boosters.',
+    notifiable: 0, source: 'AHDB Sheep BRP Manual',
+  },
+
+  // Additional cattle conditions
+  {
+    id: 'calf-scour-cattle', species_id: 'cattle', condition: 'Calf Scour (neonatal diarrhoea)',
+    symptoms: 'Profuse watery diarrhoea in calves under 3 weeks, dehydration, weakness, sunken eyes, death if untreated',
+    causes: 'Rotavirus, coronavirus, Cryptosporidium, E. coli (K99). Often mixed infections. Poor colostrum intake and hygiene predispose.',
+    treatment: 'Oral rehydration therapy (electrolytes), continue milk feeding, systemic antibiotics if bacterial, IV fluids in severe cases.',
+    prevention: 'Adequate colostrum (2L within 2 hours), clean calving environment, dam vaccination (Rotavec Corona), individual calf pens, good hygiene',
+    notifiable: 0, source: 'AHDB Beef & Dairy BRP',
+  },
+  {
+    id: 'milk-fever-cattle', species_id: 'cattle', condition: 'Milk Fever (hypocalcaemia)',
+    symptoms: 'Staggering, muscle tremors, recumbency, cold ears, reduced rumen activity, dilated pupils, coma and death if untreated',
+    causes: 'Acute calcium deficiency at onset of lactation. Older cows and high-yielding breeds most at risk. Excessive calcium in dry period predisposes.',
+    treatment: 'IV calcium borogluconate (400ml of 40% solution), subcutaneous calcium as follow-up. Response within 30 minutes expected.',
+    prevention: 'Low-calcium dry cow diet, magnesium supplementation pre-calving, oral calcium bolus at calving, avoid over-conditioning',
+    notifiable: 0, source: 'AHDB Beef & Dairy BRP',
+  },
+  {
+    id: 'grass-staggers-cattle', species_id: 'cattle', condition: 'Grass Staggers (hypomagnesaemia)',
+    symptoms: 'Sudden onset: staggering, excitability, muscle twitching, convulsions, death within hours if untreated. Often found dead.',
+    causes: 'Acute magnesium deficiency. Most common in spring on lush grass (low Mg, high potassium). Lactating cows at highest risk.',
+    treatment: 'IV magnesium sulphate (50ml of 25% solution) slowly, followed by subcutaneous magnesium. Handle quietly to avoid triggering convulsions.',
+    prevention: 'Magnesium supplementation (mag bolus, high-mag minerals, dusting pasture with calcined magnesite), avoid turning out onto lush spring grass suddenly',
+    notifiable: 0, source: 'AHDB Beef & Dairy BRP',
+  },
+
+  // Additional pig conditions
+  {
+    id: 'meningitis-pigs', species_id: 'pigs', condition: 'Meningitis (Streptococcus suis)',
+    symptoms: 'Paddling, opisthotonus, fever, blindness, tremors, sudden death in weaners and growers. Joint swelling in chronic cases.',
+    causes: 'Streptococcus suis (multiple serotypes, especially type 2). Carried in tonsils. Stress (weaning, mixing, transport) triggers clinical disease.',
+    treatment: 'Early high-dose penicillin or amoxicillin. Anti-inflammatory drugs (meloxicam). Supportive nursing of affected pigs.',
+    prevention: 'Avoid mixing/stress triggers, good ventilation, autogenous vaccines where indicated, strategic medication around weaning',
+    notifiable: 0, source: 'AHDB Pork BRP',
+  },
+  {
+    id: 'ped-pigs', species_id: 'pigs', condition: 'Porcine Epidemic Diarrhoea (PED)',
+    symptoms: 'Acute watery diarrhoea, vomiting, dehydration. High mortality (50-100%) in neonatal piglets. Older pigs recover but lose condition.',
+    causes: 'Porcine epidemic diarrhoea virus (Alphacoronavirus). Faecal-oral transmission. Highly contagious. Can survive in slurry.',
+    treatment: 'No specific treatment. Oral rehydration, supportive care, ensure piglets access to sow milk. Older pigs self-limit in 7-10 days.',
+    prevention: 'Strict biosecurity, feedback (controlled exposure of sows to build immunity), quarantine, vehicle disinfection, temperature monitoring',
+    notifiable: 0, source: 'AHDB Pork BRP',
+  },
+
+  // Additional goat conditions
+  {
+    id: 'johnes-goats', species_id: 'goats', condition: 'Johne\'s Disease (paratuberculosis)',
+    symptoms: 'Chronic weight loss despite normal appetite, intermittent diarrhoea, poor body condition, dry rough coat, reduced milk yield',
+    causes: 'Mycobacterium avium subsp. paratuberculosis (MAP). Faecal-oral transmission, kids most susceptible. Long incubation (1-3 years).',
+    treatment: 'No effective treatment. Cull clinical cases to reduce shedding and environmental contamination.',
+    prevention: 'Snatch kid rearing, test and cull programme, pasteurise colostrum/milk, biosecurity on purchases, herd accreditation scheme',
+    notifiable: 0, source: 'AHDB / Goat Veterinary Society',
+  },
+  {
+    id: 'coccidiosis-goats', species_id: 'goats', condition: 'Coccidiosis',
+    symptoms: 'Diarrhoea (sometimes bloody) in kids 3-8 weeks old, dehydration, weight loss, straining, poor growth rates',
+    causes: 'Eimeria species (protozoan parasites, especially E. arloingi, E. ninakohlyakimovae). Oocysts persist in environment.',
+    treatment: 'Toltrazuril (Baycox) or diclazuril oral drench. Rehydration therapy for dehydrated kids.',
+    prevention: 'Clean dry bedding, avoid overcrowding, strategic treatment at 3-4 weeks, rotate pastures, separate age groups',
+    notifiable: 0, source: 'AHDB / Goat Veterinary Society',
+  },
+
+  // Duck health conditions
+  {
+    id: 'dvh-ducks', species_id: 'ducks', condition: 'Duck Virus Hepatitis',
+    symptoms: 'Sudden death in ducklings under 6 weeks, opisthotonus (head thrown back), lethargy, blue beak discolouration',
+    causes: 'Duck hepatitis virus (types 1, 2, 3). Highly contagious. Faecal-oral transmission. High mortality in young ducklings.',
+    treatment: 'No specific treatment. Antiserum from recovered birds may help. Supportive care and warmth.',
+    prevention: 'Vaccination of breeder ducks (maternal antibody transfer), biosecurity, quarantine, thorough cleaning between batches',
+    notifiable: 0, source: 'DEFRA / APHA Guidance on Duck Diseases',
+  },
+  {
+    id: 'aspergillosis-ducks', species_id: 'ducks', condition: 'Aspergillosis (brooder pneumonia)',
+    symptoms: 'Gasping, open-mouth breathing, lethargy, loss of appetite, greenish plaques in air sacs and lungs at post-mortem',
+    causes: 'Aspergillus fumigatus fungus. Spores from mouldy litter or feed. Young ducklings and immunocompromised birds most susceptible.',
+    treatment: 'Antifungal drugs (itraconazole) with limited success. Remove from mouldy environment. Prognosis poor in advanced cases.',
+    prevention: 'Use fresh, dry, mould-free litter, good ventilation, avoid damp conditions, store feed properly, clean incubators thoroughly',
+    notifiable: 0, source: 'DEFRA / APHA Guidance on Duck Diseases',
+  },
+  {
+    id: 'bumblefoot-ducks', species_id: 'ducks', condition: 'Bumblefoot (pododermatitis)',
+    symptoms: 'Swelling and scab on footpad, lameness, reluctance to walk, abscess formation, septicaemia in severe cases',
+    causes: 'Staphylococcus aureus infection. Entry via foot injuries from rough or wire flooring. Obesity and inactivity predispose.',
+    treatment: 'Veterinary surgical debridement of abscess, systemic antibiotics (amoxicillin), anti-inflammatory drugs, foot bandaging.',
+    prevention: 'Soft flooring surfaces, avoid wire mesh, adequate bedding, access to swimming water (conditions feet), maintain healthy weight',
+    notifiable: 0, source: 'DEFRA / APHA Guidance on Duck Diseases',
+  },
+
+  // Turkey health conditions
+  {
+    id: 'blackhead-turkeys', species_id: 'turkeys', condition: 'Blackhead (histomoniasis)',
+    symptoms: 'Sulphur-yellow droppings, depression, drooping wings, darkened head (cyanosis), high mortality (up to 100% in turkeys)',
+    causes: 'Histomonas meleagridis protozoan. Transmitted via Heterakis gallinarum worm eggs. Chickens are carriers with mild disease.',
+    treatment: 'No licensed treatments available in UK. Supportive care. Historically treated with dimetridazole (now banned in EU/UK).',
+    prevention: 'Never keep turkeys on ground previously used by chickens, worm control, good drainage, rotate range, avoid multi-species housing',
+    notifiable: 0, source: 'DEFRA / APHA Guidance on Turkey Diseases',
+  },
+  {
+    id: 'mg-turkeys', species_id: 'turkeys', condition: 'Mycoplasma gallisepticum (MG)',
+    symptoms: 'Nasal discharge, swollen sinuses, sneezing, foamy eyes, reduced egg production, poor growth, increased mortality in young poults',
+    causes: 'Mycoplasma gallisepticum bacterium. Egg transmission (vertical) and airborne spread. Stress triggers clinical signs in carriers.',
+    treatment: 'Antibiotics (tylosin, tiamulin) reduce clinical signs but do not eliminate carrier state. Cull severely affected birds.',
+    prevention: 'Source MG-free stock, blood testing (serology), all-in-all-out management, biosecurity, vaccination where MG is endemic',
+    notifiable: 0, source: 'DEFRA / APHA Guidance on Turkey Diseases',
+  },
+  {
+    id: 'trt-turkeys', species_id: 'turkeys', condition: 'Turkey Rhinotracheitis (TRT)',
+    symptoms: 'Swollen sinuses, sneezing, nasal discharge, head shaking, reduced egg production, frothy eyes, secondary bacterial infections',
+    causes: 'Avian metapneumovirus (aMPV). Highly contagious. Airborne transmission. Immunosuppression leads to severe secondary infections.',
+    treatment: 'No specific antiviral. Antibiotics for secondary bacterial infections (E. coli, Bordetella). Supportive care.',
+    prevention: 'Vaccination (live and inactivated), biosecurity, good ventilation, avoid mixing ages, all-in-all-out production',
+    notifiable: 0, source: 'DEFRA / APHA Guidance on Turkey Diseases',
+  },
+
+  // Deer health conditions
+  {
+    id: 'tb-deer', species_id: 'deer', condition: 'Bovine Tuberculosis (bTB)',
+    symptoms: 'Often subclinical. Weight loss, chronic cough, enlarged lymph nodes, reduced fertility. Post-mortem: caseous granulomas in lungs/lymph nodes.',
+    causes: 'Mycobacterium bovis. Spread via aerosol, nose-to-nose contact, shared grazing with cattle or badgers.',
+    treatment: 'No treatment -- notify APHA immediately. Test and slaughter policy. Movement restrictions on herd.',
+    prevention: 'TB testing (skin test or gamma interferon), biosecurity fencing to exclude badgers, pre-movement testing, avoid contact with cattle in HRA',
+    notifiable: 1, source: 'DEFRA / APHA Notifiable Disease Guidance',
+  },
+  {
+    id: 'cwd-deer', species_id: 'deer', condition: 'Chronic Wasting Disease (CWD)',
+    symptoms: 'Progressive weight loss, excessive salivation, incoordination, head tremor, behavioural changes, death. Long incubation (16+ months).',
+    causes: 'Prion disease (transmissible spongiform encephalopathy). Not yet detected in UK but is notifiable as a precaution.',
+    treatment: 'No treatment available -- notify APHA immediately if suspected. Confirmatory testing by post-mortem examination.',
+    prevention: 'Import controls on live deer and venison, surveillance testing of culled/fallen deer, avoid importing deer from affected regions',
+    notifiable: 1, source: 'DEFRA / APHA Notifiable Disease Guidance',
+  },
+  {
+    id: 'pge-deer', species_id: 'deer', condition: 'Parasitic Gastroenteritis (PGE)',
+    symptoms: 'Weight loss, poor condition, diarrhoea, anaemia (pale membranes), reduced growth rates, bottle jaw in severe cases',
+    causes: 'Gastrointestinal nematodes (Ostertagia, Cooperia, Nematodirus). Larval build-up on pasture. Young deer most susceptible.',
+    treatment: 'Anthelmintic treatment (avermectins, benzimidazoles). Faecal egg count reduction test to check efficacy.',
+    prevention: 'Strategic worming programme, faecal egg count monitoring, pasture rotation, mixed or sequential grazing with cattle, avoid overstocking',
+    notifiable: 0, source: 'British Deer Farms and Parks Association',
+  },
+  {
+    id: 'liver-fluke-deer', species_id: 'deer', condition: 'Liver Fluke (Fasciola hepatica)',
+    symptoms: 'Weight loss, anaemia, bottle jaw (submandibular oedema), poor condition, sudden death in acute cases',
+    causes: 'Fasciola hepatica parasite. Lifecycle involves mud snail (Galba truncatula). Deer on wet pastures at risk.',
+    treatment: 'Flukicide treatment (triclabendazole, closantel). Time treatment to fluke lifecycle stage in autumn/winter.',
+    prevention: 'Drainage of wet pastures, strategic flukicide dosing, faecal egg counts, restrict access to wet areas in autumn',
+    notifiable: 0, source: 'British Deer Farms and Parks Association',
+  },
 ];
 
 // ── Movement Rules ──────────────────────────────────────────────
@@ -1091,6 +1631,57 @@ const MOVEMENT_RULES: MovementRule[] = [
     exceptions: 'Pigs with ear tags showing herd mark are also acceptable',
     authority: 'APHA',
     regulation_ref: 'Pigs (Records, Identification and Movement) (England) Order 2011',
+  },
+  // Ducks
+  {
+    species_id: 'ducks', rule_type: 'standstill',
+    rule: 'No standstill period applies to ducks. Registration is required if 50 or more birds are kept, and APHA notification is required for certain movements.',
+    standstill_days: 0,
+    exceptions: 'Exempt from standstill rules',
+    authority: 'APHA',
+    regulation_ref: 'Registration of Establishments Keeping Poultry (England) Regulations 2010',
+  },
+  {
+    species_id: 'ducks', rule_type: 'registration',
+    rule: 'Any premises keeping 50 or more ducks must be registered with APHA. Keepers of fewer than 50 birds are encouraged to register voluntarily.',
+    standstill_days: 0,
+    exceptions: 'Birds kept as pets in small numbers',
+    authority: 'APHA',
+    regulation_ref: 'Registration of Establishments Keeping Poultry (England) Regulations 2010',
+  },
+  // Turkeys
+  {
+    species_id: 'turkeys', rule_type: 'standstill',
+    rule: 'No standstill period applies to turkeys. Registration is required if 50 or more birds are kept, and APHA notification is required for certain movements.',
+    standstill_days: 0,
+    exceptions: 'Exempt from standstill rules',
+    authority: 'APHA',
+    regulation_ref: 'Registration of Establishments Keeping Poultry (England) Regulations 2010',
+  },
+  {
+    species_id: 'turkeys', rule_type: 'registration',
+    rule: 'Any premises keeping 50 or more turkeys must be registered with APHA. Keepers of fewer than 50 birds are encouraged to register voluntarily.',
+    standstill_days: 0,
+    exceptions: 'Birds kept as pets in small numbers',
+    authority: 'APHA',
+    regulation_ref: 'Registration of Establishments Keeping Poultry (England) Regulations 2010',
+  },
+  // Deer
+  {
+    species_id: 'deer', rule_type: 'standstill',
+    rule: 'After moving deer onto a holding, a 6-day standstill applies to all deer on that holding.',
+    standstill_days: 6,
+    exceptions: 'Licensed markets, veterinary emergencies, direct movement to slaughter',
+    authority: 'APHA',
+    regulation_ref: 'Deer (England) Movement Regulations',
+  },
+  {
+    species_id: 'deer', rule_type: 'identification',
+    rule: 'Farmed deer must be identified by ear tag or microchip. APHA must be notified of movements between holdings.',
+    standstill_days: 0,
+    exceptions: 'Wild deer are not subject to identification requirements',
+    authority: 'APHA',
+    regulation_ref: 'Deer (England) Movement Regulations',
   },
 ];
 
@@ -1215,6 +1806,54 @@ const HOUSING_REQUIREMENTS: HousingRequirement[] = [
     lighting: 'Adequate lighting for supervision, natural daylight plus supplementary',
     source: 'DEFRA Code of Practice for the Welfare of Sheep',
   },
+  // Ducks
+  {
+    species_id: 'ducks', age_class: 'adult', system: 'indoor',
+    space_per_head_m2: 0.25,
+    ventilation: 'Good ventilation to manage humidity from water use',
+    flooring: 'Non-slip flooring with straw or shavings bedding, waterproof shelter',
+    temperature_range: '5-10C acceptable, hardy species',
+    lighting: 'Natural daylight minimum, 14-16 hours for laying ducks',
+    source: 'DEFRA Code of Practice for the Welfare of Ducks',
+  },
+  // Turkeys
+  {
+    species_id: 'turkeys', age_class: 'female', system: 'indoor',
+    space_per_head_m2: 0.75,
+    ventilation: 'Mechanical or natural, 0.5 m/s max air speed at bird level',
+    flooring: 'Litter floor (wood shavings or straw)',
+    temperature_range: '15-21C',
+    lighting: '20 lux minimum, 8 hours continuous dark',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  {
+    species_id: 'turkeys', age_class: 'male', system: 'indoor',
+    space_per_head_m2: 1.0,
+    ventilation: 'Mechanical or natural, 0.5 m/s max air speed at bird level',
+    flooring: 'Litter floor (wood shavings or straw)',
+    temperature_range: '15-21C',
+    lighting: '20 lux minimum, 8 hours continuous dark',
+    source: 'DEFRA Code of Practice for the Welfare of Turkeys',
+  },
+  // Deer
+  {
+    species_id: 'deer', age_class: 'hind', system: 'open_sided_shelter',
+    space_per_head_m2: 3.0,
+    ventilation: 'Open-sided, natural ventilation',
+    flooring: 'Straw bedding on solid base, non-slip',
+    temperature_range: 'Outdoor ambient, shelter from wind and rain',
+    lighting: 'Natural daylight',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
+  {
+    species_id: 'deer', age_class: 'adult', system: 'handling_pen',
+    space_per_head_m2: 2.0,
+    ventilation: 'Open-topped or well-ventilated',
+    flooring: 'Non-slip surface (rubber matting or earth), solid barriers minimum 1.8m',
+    temperature_range: 'Outdoor ambient',
+    lighting: 'Dim lighting preferred to reduce stress',
+    source: 'DEFRA Code of Recommendations for the Welfare of Farmed Deer',
+  },
 ];
 
 // ── Breeding Guidance ───────────────────────────────────────────
@@ -1263,6 +1902,27 @@ const BREEDING_GUIDANCE: BreedingGuidanceEntry[] = [
     calendar: { mating: 'Aug-Feb', scanning: 'Oct-Apr', kidding: 'Dec-Apr', weaning: 'Mar-Jul' },
     gestation_days: 150,
     source: 'DEFRA Code of Recommendations for the Welfare of Goats',
+  },
+  {
+    species_id: 'ducks', topic: 'hatching',
+    guidance: 'Duck incubation period is 28 days. Breeding season typically February to July for most breeds. Some breeds (Muscovy) are seasonal layers, while others (Khaki Campbell) can lay year-round with 14+ hours of light. Fertility best when drakes are 1 drake per 5-8 ducks.',
+    calendar: { breeding: 'Feb-Jul', egg_collection: 'daily', incubation_start: 'within_7_days_of_lay', hatch: '28_days_post_set' },
+    gestation_days: 28,
+    source: 'DEFRA / British Waterfowl Association',
+  },
+  {
+    species_id: 'turkeys', topic: 'hatching',
+    guidance: 'Turkey incubation period is 28 days. Commercial breeding is year-round using artificial insemination. Natural mating is seasonal (spring). Incubator temperature 37.5C with 55% humidity, increasing to 75% in final 3 days. Heavy breeds require AI as natural mating can injure hens.',
+    calendar: { breeding: 'year-round (AI) or spring (natural)', egg_collection: 'daily', incubation_start: 'within_7_days_of_lay', hatch: '28_days_post_set' },
+    gestation_days: 28,
+    source: 'DEFRA / British Turkey Federation',
+  },
+  {
+    species_id: 'deer', topic: 'calving',
+    guidance: 'Red deer gestation is approximately 233 days, fallow deer 230 days. Rutting season runs September to November. Calving typically May to July. Hinds should be left undisturbed during calving. First-calving hinds need monitoring but minimal intervention. Calf mortality is higher in poor weather years.',
+    calendar: { rutting: 'Sep-Nov', pregnancy_check: 'Jan-Feb', calving: 'May-Jul', weaning: 'Sep-Oct' },
+    gestation_days: 233,
+    source: 'British Deer Farms and Parks Association',
   },
 ];
 
