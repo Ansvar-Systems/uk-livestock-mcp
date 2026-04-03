@@ -1,5 +1,6 @@
 {
   "name": "@ansvar/uk-livestock-mcp",
+  "mcpName": "io.github.ansvar-systems/uk-livestock",
   "version": "0.1.0",
   "description": "UK livestock welfare, feed, health, and movement rules via MCP -- stocking densities, breeding guidance, APHA regulations",
   "type": "module",
