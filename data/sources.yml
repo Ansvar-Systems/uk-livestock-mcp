@@ -1,0 +1,80 @@
+schema_version: "1.0"
+mcp_name: "Livestock MCP"
+category: "domain_intelligence"
+
+sources:
+  - name: "AHDB Livestock Guidance"
+    authority: "Agriculture and Horticulture Development Board"
+    official_url: "https://ahdb.org.uk/knowledge-library"
+    api_url: null
+    retrieval_method: "HTML_SCRAPE"
+    format: "HTML"
+    authentication: "none"
+    update_frequency: "quarterly"
+    license:
+      type: "Open Government Licence"
+      url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      summary: "Free to copy, publish, distribute, and adapt with attribution"
+    coverage:
+      scope: "Welfare standards, feed requirements, stocking densities, breeding guidance for sheep, cattle, and pigs"
+      version: "current"
+      item_count: "~500 guidance entries"
+    languages:
+      - "en"
+
+  - name: "DEFRA Welfare Codes of Practice"
+    authority: "Department for Environment, Food and Rural Affairs"
+    official_url: "https://www.gov.uk/government/collections/animal-welfare-codes-of-practice"
+    api_url: null
+    retrieval_method: "PDF_PARSE"
+    format: "PDF"
+    authentication: "none"
+    update_frequency: "as_amended"
+    license:
+      type: "Open Government Licence"
+      url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      summary: "Free to copy, publish, distribute, and adapt with attribution"
+    coverage:
+      scope: "Statutory welfare codes for cattle, sheep, pigs -- legal minimum standards and best practice"
+      version: "current editions"
+      item_count: "3 species codes"
+    languages:
+      - "en"
+
+  - name: "APHA Movement Rules"
+    authority: "Animal and Plant Health Agency"
+    official_url: "https://www.gov.uk/guidance/cattle-movement-rules"
+    api_url: null
+    retrieval_method: "HTML_SCRAPE"
+    format: "HTML"
+    authentication: "none"
+    update_frequency: "as_amended"
+    license:
+      type: "Open Government Licence"
+      url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      summary: "Free to copy, publish, distribute, and adapt with attribution"
+    coverage:
+      scope: "Standstill periods, movement reporting, exemptions for sheep, cattle, and pigs"
+      version: "current"
+      item_count: "~30 rule entries"
+    languages:
+      - "en"
+
+  - name: "DEFRA Notifiable Diseases"
+    authority: "Department for Environment, Food and Rural Affairs"
+    official_url: "https://www.gov.uk/government/collections/notifiable-diseases-in-animals"
+    api_url: null
+    retrieval_method: "HTML_SCRAPE"
+    format: "HTML"
+    authentication: "none"
+    update_frequency: "as_amended"
+    license:
+      type: "Open Government Licence"
+      url: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+      summary: "Free to copy, publish, distribute, and adapt with attribution"
+    coverage:
+      scope: "Notifiable animal diseases, symptoms, reporting requirements"
+      version: "current"
+      item_count: "~40 disease entries"
+    languages:
+      - "en"
