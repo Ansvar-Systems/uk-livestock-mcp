@@ -20,7 +20,7 @@ import { handleGetHousingRequirements } from './tools/get-housing-requirements.j
 import { handleGetMovementRules } from './tools/get-movement-rules.js';
 import { handleGetBreedingGuidance } from './tools/get-breeding-guidance.js';
 
-const SERVER_NAME = 'livestock-mcp';
+const SERVER_NAME = 'uk-livestock-mcp';
 const SERVER_VERSION = '0.1.0';
 
 const TOOLS = [

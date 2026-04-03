@@ -1,7 +1,7 @@
-# Livestock MCP
+# UK Livestock MCP
 
-[![CI](https://github.com/ansvar-systems/livestock-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ansvar-systems/livestock-mcp/actions/workflows/ci.yml)
-[![GHCR](https://github.com/ansvar-systems/livestock-mcp/actions/workflows/ghcr-build.yml/badge.svg)](https://github.com/ansvar-systems/livestock-mcp/actions/workflows/ghcr-build.yml)
+[![CI](https://github.com/ansvar-systems/uk-livestock-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ansvar-systems/uk-livestock-mcp/actions/workflows/ci.yml)
+[![GHCR](https://github.com/ansvar-systems/uk-livestock-mcp/actions/workflows/ghcr-build.yml/badge.svg)](https://github.com/ansvar-systems/uk-livestock-mcp/actions/workflows/ghcr-build.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 UK livestock welfare, feed, health, housing, movement rules, and breeding guidance via the [Model Context Protocol](https://modelcontextprotocol.io). Query DEFRA welfare codes, APHA movement standstills, stocking densities, and breeding calendars -- all from your AI assistant.
@@ -21,9 +21,9 @@ Add to `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "livestock": {
+    "uk-livestock": {
       "command": "npx",
-      "args": ["-y", "@ansvar/livestock-mcp"]
+      "args": ["-y", "@ansvar/uk-livestock-mcp"]
     }
   }
 }
@@ -32,25 +32,25 @@ Add to `claude_desktop_config.json`:
 ### Claude Code
 
 ```bash
-claude mcp add livestock npx @ansvar/livestock-mcp
+claude mcp add uk-livestock npx @ansvar/uk-livestock-mcp
 ```
 
 ### Streamable HTTP (remote)
 
 ```
-https://mcp.ansvar.eu/livestock/mcp
+https://mcp.ansvar.eu/uk-livestock/mcp
 ```
 
 ### Docker (self-hosted)
 
 ```bash
-docker run -p 3000:3000 ghcr.io/ansvar-systems/livestock-mcp:latest
+docker run -p 3000:3000 ghcr.io/ansvar-systems/uk-livestock-mcp:latest
 ```
 
 ### npm (stdio)
 
 ```bash
-npx @ansvar/livestock-mcp
+npx @ansvar/uk-livestock-mcp
 ```
 
 ## Example Queries

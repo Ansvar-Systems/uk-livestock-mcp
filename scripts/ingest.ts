@@ -1,5 +1,5 @@
 /**
- * Livestock MCP -- Data Ingestion Script
+ * UK Livestock MCP -- Data Ingestion Script
  *
  * Sources:
  * 1. DEFRA Welfare Codes of Practice (sheep, cattle, pigs, poultry)
@@ -748,7 +748,7 @@ const BREEDING_GUIDANCE: BreedingGuidanceEntry[] = [
 
 function ingest(db: Database): void {
   const now = new Date().toISOString().split('T')[0];
-  console.log(`Livestock MCP ingestion started at ${now}`);
+  console.log(`UK Livestock MCP ingestion started at ${now}`);
   console.log('Sources: DEFRA Welfare Codes, APHA Movement Rules, AHDB Guidance, DEFRA Notifiable Diseases\n');
 
   // Clear existing data
@@ -972,7 +972,7 @@ function ingest(db: Database): void {
 
   // Write coverage.json
   const coverage = {
-    mcp_name: 'Livestock MCP',
+    mcp_name: 'UK Livestock MCP',
     jurisdiction: 'GB',
     build_date: now,
     species: SPECIES.length,

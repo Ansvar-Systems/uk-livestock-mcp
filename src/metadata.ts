@@ -20,7 +20,7 @@ export function buildMeta(overrides?: Partial<Meta>): Meta {
     data_age: overrides?.data_age ?? 'unknown',
     source_url: overrides?.source_url ?? 'https://ahdb.org.uk/knowledge-library',
     copyright: 'Data: Crown Copyright, AHDB, and DEFRA. Server: Apache-2.0 Ansvar Systems.',
-    server: 'livestock-mcp',
+    server: 'uk-livestock-mcp',
     version: '0.1.0',
     ...overrides,
   };

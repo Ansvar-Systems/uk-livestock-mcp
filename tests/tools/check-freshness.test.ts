@@ -42,7 +42,7 @@ describe('check_data_freshness tool', () => {
 
   test('includes refresh command', () => {
     const result = handleCheckFreshness(db);
-    expect(result.refresh_command).toContain('livestock-mcp');
+    expect(result.refresh_command).toContain('uk-livestock-mcp');
   });
 
   test('includes schema_version', () => {

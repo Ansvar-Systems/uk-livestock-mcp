@@ -3,7 +3,7 @@ import { SUPPORTED_JURISDICTIONS } from '../jurisdiction.js';
 
 export function handleAbout() {
   return {
-    name: 'Livestock MCP',
+    name: 'UK Livestock MCP',
     description:
       'UK livestock welfare standards, feed requirements, animal health, housing, stocking densities, ' +
       'movement rules, and breeding guidance. Covers sheep, cattle, and pigs with data from AHDB, ' +
@@ -19,7 +19,7 @@ export function handleAbout() {
     tools_count: 11,
     links: {
       homepage: 'https://ansvar.eu/open-agriculture',
-      repository: 'https://github.com/ansvar-systems/livestock-mcp',
+      repository: 'https://github.com/ansvar-systems/uk-livestock-mcp',
       mcp_network: 'https://ansvar.ai/mcp',
     },
     _meta: buildMeta(),

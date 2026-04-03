@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  livestock-mcp:
+  uk-livestock-mcp:
     build: .
     ports:
       - "3000:3000"

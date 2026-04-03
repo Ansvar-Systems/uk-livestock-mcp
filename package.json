@@ -1,11 +1,11 @@
 {
-  "name": "@ansvar/livestock-mcp",
+  "name": "@ansvar/uk-livestock-mcp",
   "version": "0.1.0",
   "description": "UK livestock welfare, feed, health, and movement rules via MCP -- stocking densities, breeding guidance, APHA regulations",
   "type": "module",
   "main": "dist/server.js",
   "bin": {
-    "livestock-mcp": "dist/server.js"
+    "uk-livestock-mcp": "dist/server.js"
   },
   "scripts": {
     "build": "tsc",
@@ -27,7 +27,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ansvar-systems/livestock-mcp"
+    "url": "https://github.com/ansvar-systems/uk-livestock-mcp"
   },
   "homepage": "https://ansvar.eu/open-agriculture",
   "engines": {
