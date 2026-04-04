@@ -153,17 +153,116 @@ function initSchema(db: BetterSqlite3.Database): void {
   `);
 }
 
+const FTS_COLUMNS = ['title', 'body', 'species', 'category', 'jurisdiction'];
+
 export function ftsSearch(
   db: Database,
   query: string,
   limit: number = 20
 ): { title: string; body: string; species: string; category: string; jurisdiction: string; rank: number }[] {
-  return db.all(
-    `SELECT title, body, species, category, jurisdiction, rank
-     FROM search_index
-     WHERE search_index MATCH ?
-     ORDER BY rank
-     LIMIT ?`,
-    [query, limit]
-  );
+  const { results } = tieredFtsSearch(db, 'search_index', FTS_COLUMNS, query, limit);
+  return results as { title: string; body: string; species: string; category: string; jurisdiction: string; rank: number }[];
+}
+
+export function tieredFtsSearch(
+  db: Database,
+  table: string,
+  columns: string[],
+  query: string,
+  limit: number = 20
+): { tier: string; results: Record<string, unknown>[] } {
+  const sanitized = sanitizeFtsInput(query);
+  if (!sanitized.trim()) return { tier: 'empty', results: [] };
+
+  const columnList = columns.join(', ');
+  const select = `SELECT ${columnList}, rank FROM ${table}`;
+  const order = `ORDER BY rank LIMIT ?`;
+
+  const phrase = `"${sanitized}"`;
+  let results = tryFts(db, select, table, order, phrase, limit);
+  if (results.length > 0) return { tier: 'phrase', results };
+
+  const words = sanitized.split(/\s+/).filter(w => w.length > 1);
+  if (words.length > 1) {
+    const andQuery = words.join(' AND ');
+    results = tryFts(db, select, table, order, andQuery, limit);
+    if (results.length > 0) return { tier: 'and', results };
+  }
+
+  const prefixQuery = words.map(w => `${w}*`).join(' AND ');
+  results = tryFts(db, select, table, order, prefixQuery, limit);
+  if (results.length > 0) return { tier: 'prefix', results };
+
+  const stemmed = words.map(w => stemWord(w) + '*');
+  const stemmedQuery = stemmed.join(' AND ');
+  if (stemmedQuery !== prefixQuery) {
+    results = tryFts(db, select, table, order, stemmedQuery, limit);
+    if (results.length > 0) return { tier: 'stemmed', results };
+  }
+
+  if (words.length > 1) {
+    const orQuery = words.join(' OR ');
+    results = tryFts(db, select, table, order, orQuery, limit);
+    if (results.length > 0) return { tier: 'or', results };
+  }
+
+  // LIKE fallback — search welfare_standards then animal_health with real column names
+  try {
+    // welfare_standards: standard, best_practice, species_id, category
+    const welfareCols = ['standard', 'best_practice', 'species_id', 'category'];
+    const welfareLike = words.map(() =>
+      `(${welfareCols.map(c => `${c} LIKE ?`).join(' OR ')})`
+    ).join(' AND ');
+    const welfareParams = words.flatMap(w =>
+      welfareCols.map(() => `%${w}%`)
+    );
+    const likeResults = db.all<Record<string, unknown>>(
+      `SELECT standard as title, COALESCE(best_practice, '') as body, species_id as species, category, jurisdiction FROM welfare_standards WHERE ${welfareLike} LIMIT ?`,
+      [...welfareParams, limit]
+    );
+    if (likeResults.length > 0) return { tier: 'like', results: likeResults };
+
+    // animal_health: condition, symptoms, treatment
+    const healthCols = ['condition', 'symptoms', 'treatment'];
+    const healthLike = words.map(() =>
+      `(${healthCols.map(c => `${c} LIKE ?`).join(' OR ')})`
+    ).join(' AND ');
+    const healthParams = words.flatMap(w =>
+      healthCols.map(() => `%${w}%`)
+    );
+    const healthResults = db.all<Record<string, unknown>>(
+      `SELECT condition as title, COALESCE(symptoms, '') || ' ' || COALESCE(treatment, '') as body, species_id as species, 'health' as category, jurisdiction FROM animal_health WHERE ${healthLike} LIMIT ?`,
+      [...healthParams, limit]
+    );
+    if (healthResults.length > 0) return { tier: 'like', results: healthResults };
+  } catch {
+    // LIKE fallback failed
+  }
+
+  return { tier: 'none', results: [] };
+}
+
+function tryFts(
+  db: Database, select: string, table: string,
+  order: string, matchExpr: string, limit: number
+): Record<string, unknown>[] {
+  try {
+    return db.all(`${select} WHERE ${table} MATCH ? ${order}`, [matchExpr, limit]);
+  } catch {
+    return [];
+  }
+}
+
+function sanitizeFtsInput(query: string): string {
+  return query
+    .replace(/["""''„‚«»]/g, '"')
+    .replace(/[^a-zA-Z0-9\s*"_-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function stemWord(word: string): string {
+  return word
+    .replace(/(ies)$/i, 'y')
+    .replace(/(ying|tion|ment|ness|able|ible|ous|ive|ing|ers|ed|es|er|ly|s)$/i, '');
 }
