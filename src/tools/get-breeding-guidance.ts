@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -59,17 +60,33 @@ export function handleGetBreedingGuidance(db: Database, args: BreedingArgs) {
   const guidance = db.all<BreedingRow>(sql, params);
 
   if (guidance.length > 0) {
-    return formatResult(guidance, jv.jurisdiction);
+    return {
+      ...formatResult(guidance, jv.jurisdiction),
+      _citation: buildCitation(
+        `UK Breeding: ${args.species}`,
+        `Breeding guidance for ${args.species} (${jv.jurisdiction})`,
+        'get_breeding_guidance',
+        { species: args.species },
+      ),
+    };
   }
 
   if (args.topic) {
     const fallback = db.all<BreedingRow>(baseSql + ' ORDER BY bg.topic, bg.id', baseParams);
     if (fallback.length > 0) {
       const available = [...new Set(fallback.map(g => g.topic))];
-      return formatResult(
-        fallback, jv.jurisdiction,
-        `topic '${args.topic}' not found. Available: ${available.join(', ')}. Showing all results.`,
-      );
+      return {
+        ...formatResult(
+          fallback, jv.jurisdiction,
+          `topic '${args.topic}' not found. Available: ${available.join(', ')}. Showing all results.`,
+        ),
+        _citation: buildCitation(
+          `UK Breeding: ${args.species}`,
+          `Breeding guidance for ${args.species} (${jv.jurisdiction})`,
+          'get_breeding_guidance',
+          { species: args.species },
+        ),
+      };
     }
   }
 

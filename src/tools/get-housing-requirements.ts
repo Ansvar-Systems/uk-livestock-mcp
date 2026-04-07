@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -70,7 +71,15 @@ export function handleGetHousingRequirements(db: Database, args: HousingArgs) {
   const housing = db.all<HousingRow>(sql, params);
 
   if (housing.length > 0) {
-    return formatResult(housing, jv.jurisdiction);
+    return {
+      ...formatResult(housing, jv.jurisdiction),
+      _citation: buildCitation(
+        `UK Housing: ${args.species}`,
+        `Housing requirements for ${args.species} (${jv.jurisdiction})`,
+        'get_housing_requirements',
+        { species: args.species },
+      ),
+    };
   }
 
   if (args.age_class || args.system) {
@@ -85,7 +94,15 @@ export function handleGetHousingRequirements(db: Database, args: HousingArgs) {
         const available = [...new Set(fallback.map(h => h.system).filter(Boolean))];
         parts.push(`system '${args.system}' not found. Available: ${available.join(', ')}`);
       }
-      return formatResult(fallback, jv.jurisdiction, parts.join('. ') + '. Showing all results.');
+      return {
+        ...formatResult(fallback, jv.jurisdiction, parts.join('. ') + '. Showing all results.'),
+        _citation: buildCitation(
+          `UK Housing: ${args.species}`,
+          `Housing requirements for ${args.species} (${jv.jurisdiction})`,
+          'get_housing_requirements',
+          { species: args.species },
+        ),
+      };
     }
   }
 

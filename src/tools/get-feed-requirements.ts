@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -70,7 +71,15 @@ export function handleGetFeedRequirements(db: Database, args: FeedArgs) {
   const feeds = db.all<FeedRow>(sql, params);
 
   if (feeds.length > 0) {
-    return formatResult(feeds, jv.jurisdiction);
+    return {
+      ...formatResult(feeds, jv.jurisdiction),
+      _citation: buildCitation(
+        `UK Feed: ${args.species}`,
+        `Feed requirements for ${args.species} (${jv.jurisdiction})`,
+        'get_feed_requirements',
+        { species: args.species },
+      ),
+    };
   }
 
   if (args.age_class || args.production_stage) {
@@ -85,7 +94,15 @@ export function handleGetFeedRequirements(db: Database, args: FeedArgs) {
         const available = [...new Set(fallback.map(f => f.production_stage).filter(Boolean))];
         parts.push(`production_stage '${args.production_stage}' not found. Available: ${available.join(', ')}`);
       }
-      return formatResult(fallback, jv.jurisdiction, parts.join('. ') + '. Showing all results.');
+      return {
+        ...formatResult(fallback, jv.jurisdiction, parts.join('. ') + '. Showing all results.'),
+        _citation: buildCitation(
+          `UK Feed: ${args.species}`,
+          `Feed requirements for ${args.species} (${jv.jurisdiction})`,
+          'get_feed_requirements',
+          { species: args.species },
+        ),
+      };
     }
   }
 

@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -62,17 +63,35 @@ export function handleGetWelfareStandards(db: Database, args: WelfareArgs) {
   const standards = db.all<WelfareRow>(sql, params);
 
   if (standards.length > 0) {
-    return formatResult(standards, jv.jurisdiction);
+    return {
+      ...formatResult(standards, jv.jurisdiction),
+      _citation: buildCitation(
+        `UK Welfare: ${args.species}`,
+        `Welfare standards for ${args.species} (${jv.jurisdiction})`,
+        'get_welfare_standards',
+        { species: args.species },
+        'https://www.gov.uk/government/collections/animal-welfare-codes-of-practice',
+      ),
+    };
   }
 
   if (args.production_system) {
     const fallback = db.all<WelfareRow>(baseSql + ' ORDER BY ws.category, ws.id', baseParams);
     if (fallback.length > 0) {
       const available = [...new Set(fallback.map(s => s.production_system).filter(Boolean))];
-      return formatResult(
-        fallback, jv.jurisdiction,
-        `production_system '${args.production_system}' not found. Available: ${available.join(', ')}. Showing all results.`,
-      );
+      return {
+        ...formatResult(
+          fallback, jv.jurisdiction,
+          `production_system '${args.production_system}' not found. Available: ${available.join(', ')}. Showing all results.`,
+        ),
+        _citation: buildCitation(
+          `UK Welfare: ${args.species}`,
+          `Welfare standards for ${args.species} (${jv.jurisdiction})`,
+          'get_welfare_standards',
+          { species: args.species },
+          'https://www.gov.uk/government/collections/animal-welfare-codes-of-practice',
+        ),
+      };
     }
   }
 
