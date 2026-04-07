@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -69,7 +70,15 @@ export function handleGetStockingDensity(db: Database, args: StockingArgs) {
   const densities = db.all<DensityRow>(sql, params);
 
   if (densities.length > 0) {
-    return formatResult(densities, jv.jurisdiction);
+    return {
+      ...formatResult(densities, jv.jurisdiction),
+      _citation: buildCitation(
+        `UK Stocking Density: ${args.species}`,
+        `Stocking density requirements for ${args.species} (${jv.jurisdiction})`,
+        'get_stocking_density',
+        { species: args.species },
+      ),
+    };
   }
 
   if (args.age_class || args.housing_type) {
@@ -84,7 +93,15 @@ export function handleGetStockingDensity(db: Database, args: StockingArgs) {
         const available = [...new Set(fallback.map(d => d.housing_type))];
         parts.push(`housing_type '${args.housing_type}' not found. Available: ${available.join(', ')}`);
       }
-      return formatResult(fallback, jv.jurisdiction, parts.join('. ') + '. Showing all results.');
+      return {
+        ...formatResult(fallback, jv.jurisdiction, parts.join('. ') + '. Showing all results.'),
+        _citation: buildCitation(
+          `UK Stocking Density: ${args.species}`,
+          `Stocking density requirements for ${args.species} (${jv.jurisdiction})`,
+          'get_stocking_density',
+          { species: args.species },
+        ),
+      };
     }
   }
 

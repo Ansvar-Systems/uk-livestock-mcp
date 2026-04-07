@@ -1,4 +1,5 @@
 import { buildMeta } from '../metadata.js';
+import { buildCitation } from '../citation.js';
 import { validateJurisdiction } from '../jurisdiction.js';
 import type { Database } from '../db.js';
 
@@ -61,17 +62,35 @@ export function handleGetMovementRules(db: Database, args: MovementArgs) {
   const rules = db.all<MovementRow>(sql, params);
 
   if (rules.length > 0) {
-    return formatResult(rules, jv.jurisdiction);
+    return {
+      ...formatResult(rules, jv.jurisdiction),
+      _citation: buildCitation(
+        `UK Movement Rules: ${args.species}`,
+        `Livestock movement rules for ${args.species} (${jv.jurisdiction})`,
+        'get_movement_rules',
+        { species: args.species },
+        'https://www.gov.uk/guidance/cattle-movement-rules',
+      ),
+    };
   }
 
   if (args.rule_type) {
     const fallback = db.all<MovementRow>(baseSql + ' ORDER BY mr.rule_type, mr.id', baseParams);
     if (fallback.length > 0) {
       const available = [...new Set(fallback.map(r => r.rule_type))];
-      return formatResult(
-        fallback, jv.jurisdiction,
-        `rule_type '${args.rule_type}' not found. Available: ${available.join(', ')}. Showing all results.`,
-      );
+      return {
+        ...formatResult(
+          fallback, jv.jurisdiction,
+          `rule_type '${args.rule_type}' not found. Available: ${available.join(', ')}. Showing all results.`,
+        ),
+        _citation: buildCitation(
+          `UK Movement Rules: ${args.species}`,
+          `Livestock movement rules for ${args.species} (${jv.jurisdiction})`,
+          'get_movement_rules',
+          { species: args.species },
+          'https://www.gov.uk/guidance/cattle-movement-rules',
+        ),
+      };
     }
   }
 
