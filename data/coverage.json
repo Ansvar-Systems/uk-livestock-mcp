@@ -1,59 +1,14 @@
 {
-  "schema_version": "1.0",
   "mcp_name": "UK Livestock MCP",
   "jurisdiction": "GB",
-  "build_date": "2026-04-03",
-  "sources": [
-    {
-      "name": "DEFRA Welfare Codes of Practice",
-      "url": "https://www.gov.uk/government/publications/code-of-recommendations-for-the-welfare-of-livestock",
-      "record_count": 80,
-      "record_type": "welfare standards",
-      "completeness": 0.90,
-      "last_checked": "2026-04-03"
-    },
-    {
-      "name": "AHDB Livestock Guidance",
-      "url": "https://ahdb.org.uk/knowledge-library",
-      "record_count": 22,
-      "record_type": "feed requirements",
-      "completeness": 0.85,
-      "last_checked": "2026-04-03"
-    },
-    {
-      "name": "APHA Movement Rules",
-      "url": "https://www.gov.uk/guidance/animal-movement-licences",
-      "record_count": 18,
-      "record_type": "movement rules",
-      "completeness": 0.95,
-      "last_checked": "2026-04-03"
-    },
-    {
-      "name": "DEFRA Notifiable Diseases",
-      "url": "https://www.gov.uk/government/collections/notifiable-diseases-in-animals",
-      "record_count": 47,
-      "record_type": "health conditions",
-      "completeness": 0.90,
-      "last_checked": "2026-04-03"
-    }
-  ],
-  "gaps": [
-    "Equines (horses) not included",
-    "Camelids (alpacas, llamas) not included",
-    "Aquaculture not included",
-    "Detailed breed-specific nutrition not modeled",
-    "Show/exhibition regulations not included"
-  ],
-  "summary": {
-    "species": 8,
-    "welfare_standards": 80,
-    "stocking_densities": 22,
-    "feed_requirements": 22,
-    "animal_health_conditions": 47,
-    "movement_rules": 18,
-    "housing_requirements": 16,
-    "breeding_guidance": 8,
-    "notifiable_diseases": 6,
-    "fts_entries": 213
-  }
+  "build_date": "2026-05-01",
+  "species": 8,
+  "welfare_standards": 80,
+  "stocking_densities": 22,
+  "feed_requirements": 22,
+  "animal_health": 47,
+  "movement_rules": 18,
+  "housing_requirements": 16,
+  "breeding_guidance": 8,
+  "fts_entries": 213
 }
